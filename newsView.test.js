@@ -29,15 +29,21 @@ describe('NewsView class', () => {
     
       expect(websiteArticles.length).toEqual(3);
       
-      // checking the headlines
-      let websiteHeadlines = document.querySelectorAll('h1')
+      // checking the displaying headlines
+      let websiteHeadlines = document.querySelectorAll('h1.article-headline')
+      
       for (let index = 0; index < articles.length; index++) {
         expect(websiteHeadlines[index].textContent).toEqual(articles[index].webTitle)
       }
 
+      // checking link in headlines
+      for (let index = 0; index < articles.length; index++) {
+        expect(websiteHeadlines[index].href).toEqual(expect.stringContaining(articles[index].webUrl))
+      }
+      
       // checking images
       let websiteImages = document.querySelectorAll('img')
-      for (let index = 0; index < websiteImages.length; index++) {
+      for (let index = 0; index < articles.length; index++) {
         expect(websiteImages[index].src).toEqual(expect.stringContaining(articles[index].fields.thumbnail)) 
       }
     })
